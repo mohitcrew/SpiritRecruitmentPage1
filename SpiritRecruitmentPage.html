@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Review Page</title>
+    <style>
+        body {
+            background-image: url(https://res.cloudinary.com/djmqwehwk/image/upload/v1738001680/eq69falh7ttpo0wkybci.png);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            
+            color: #eaeaea;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: #16213e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #e7092e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #555;
+            text-align: center;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #0f3460;
+            color: #eaeaea;
+        }
+
+        tr:nth-child(even) {
+            background-color: #1a1a2e;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #16213e;
+        }
+
+        .btn {
+            background-color: #e7092e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #c3052f;
+
+            transform: scale(1.1); 
+        }
+
+
+        .btn:active {
+            background-color: #29ad2f; 
+            transform: scale(0.95);
+            box-shadow: 0 5px #666, 0 -2px 3px rgba(0,0,0,0.1);
+        }
+
+
+        .btn:focus {
+             outline: none;
+             box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+        }
+
+
+        .dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.2s;
+        }
+
+        .dialog-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .dialog {
+            background: #16213e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 300px;
+        }
+
+        .dialog h3 {
+            margin-bottom: 15px;
+            color: #c50827;
+        }
+
+        .close-btn {
+            background-color: #c80626;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background-color: #9e0829;
+        }
+        
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: ripple-animation 0.6s ease-out;
+            pointer-events: none;
+            transform: scale(1);
+}
+
+@keyframes ripple-animation {
+    from {
+        transform: scale(0);
+        opacity: 0.8;
+    }
+    to {
+        transform: scale(10);
+        opacity: 0;
+    }
+}
+
+
+tr:hover {
+    transition: all 0.3s ease;
+}
+
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        animation: floatEffect 3s ease-in-out infinite;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        transition: transform 0.2s ease;
+    }
+
+    
+    @keyframes floatEffect {
+        0% {
+            transform: translateY(0);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+        50% {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+        }
+        100% {
+            transform: translateY(0);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+
+    table:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+
+
+    @keyframes shadowPulse {
+        0% {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        50% {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+        }
+        100% {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    .dialog.active {
+        animation: shadowPulse 2s infinite;
+    }
+
+    .container {
+    max-width: 800px;
+    margin: 30px auto;
+    background: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.6), 
+                -10px -10px 15px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.8), 
+                -15px -15px 20px rgba(255, 255, 255, 0.2);
+}
+
+
+
+</style>
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Candidate Details</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Registration no</th>
+                    <th>Candidate Name</th>
+                    <th>Email</th>
+                    <th>Whatapp no</th>
+                    <th>Year</th>
+                    <th>Interested Domain</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1240****</td>
+                    <td>John Doe</td>
+                    <td>*****@gmail.com</td>
+                    <td>+91 **********</td>
+                    <td>1st year</td>
+                    <td>Technical</td>
+                    <td><button class="btn" onclick="showReview('John Doe', 'Excellent problem-solving skills and teamwork.')">Review</button></td>
+                </tr>
+                <tr>
+                    <td>1240****</td>
+                    <td>Jane Smith</td>
+                    <td>*****@gmail.com</td>
+                    <td>+91 **********</td>
+                    <td>2nd year</td>
+                    <td>Dance</td>
+                    <td><button class="btn" onclick="showReview('Jane Smith', 'Strong analytical skills and attention to detail.')">Review</button></td>
+                </tr>
+                <tr>
+                    <td>1240****</td>
+                    <td>Bob Johnson</td>
+                    <td>*****@gmail.com</td>
+                    <td>+91 **********</td>
+                    <td>2nd year</td>
+                    <td>Fine arts</td>
+                    <td><button class="btn" onclick="showReview('Bob Johnson', 'Creative design thinking and great communication.')">Review</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="dialog-overlay" id="dialog-overlay">
+        <div class="dialog">
+            <h3 id="candidate-name">Candidate Name</h3>
+            <p id="review-text">Review text will go here.</p>
+            <button class="close-btn" onclick="closeDialog()">Close</button>
+        </div>
+    </div>
+
+    <script>
+
+function showReview(name, review) {
+    const overlay = document.getElementById('dialog-overlay');
+    document.getElementById('candidate-name').innerText = name;
+    document.getElementById('review-text').innerText = review;
+
+    overlay.classList.add('active'); 
+    overlay.style.transform = 'scale(0.9)'; 
+    setTimeout(() => {
+        overlay.style.transform = 'scale(1)';
+    }, 50); 
+}
+
+function closeDialog() {
+    const overlay = document.getElementById('dialog-overlay');
+    overlay.style.transform = 'scale(0.9)'; 
+    setTimeout(() => {
+        overlay.classList.remove('active'); 
+    }, 200);
+}
+
+
+document.querySelectorAll('.btn').forEach((button) => {
+    button.addEventListener('click', (e) => {
+        const ripple = document.createElement('span');
+        const rect = button.getBoundingClientRect();
+        ripple.style.left = `${e.clientX - rect.left}px`;
+        ripple.style.top = `${e.clientY - rect.top}px`;
+        ripple.className = 'ripple';
+        button.appendChild(ripple);
+
+        setTimeout(() => {
+            ripple.remove();
+        }, 600); 
+    });
+});
+
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeDialog();
+    }
+});
+
+
+document.querySelectorAll('tr').forEach((row) => {
+    row.addEventListener('mouseenter', () => {
+        row.style.backgroundColor = '#e94560';
+        row.style.color = '#fff';
+    });
+    row.addEventListener('mouseleave', () => {
+        row.style.backgroundColor = ''; 
+        row.style.color = '';
+    });
+});
+
+
+
+function showReview(name, review) {
+        const overlay = document.getElementById('dialog-overlay');
+        const dialog = document.querySelector('.dialog');
+
+        document.getElementById('candidate-name').innerText = name;
+        document.getElementById('review-text').innerText = review;
+
+        overlay.classList.add('active');
+        dialog.classList.add('active'); 
+
+        overlay.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            overlay.style.transform = 'scale(1)';
+        }, 50);
+    }
+
+    function closeDialog() {
+        const overlay = document.getElementById('dialog-overlay');
+        const dialog = document.querySelector('.dialog');
+
+        overlay.style.transform = 'scale(0.9)'; 
+        setTimeout(() => {
+            overlay.classList.remove('active'); 
+            dialog.classList.remove('active'); 
+        }, 200);
+    }
+
+
+    </script>
+</body>
+</html>
